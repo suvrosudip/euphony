@@ -1,0 +1,64 @@
+body {
+	font-family: myfont;
+	src: url('YanoneKaffeesatz-Regular.otf');
+	background-color: #0b5f7b;
+	color: #ffffff;
+}
+
+@font-face {
+    font-family: myfont;
+	src: url('YanoneKaffeesatz-Regular.otf');
+}
+
+div {
+    font-family: myfont;
+}
+
+div a:hover {
+	color: white;
+}
+
+div table:hover {
+	color: 0b5f7b;
+}
+
+/* unvisited link */
+a:link {
+    color: white;
+}
+
+/* visited link */
+a:visited {
+    color: white;
+}
+
+/* mouse over link */
+a:hover {
+    color: 0b5f7b;
+}
+
+/* selected link */
+a:active {
+    color: white;
+}
+
+#now_playing_div {
+            background-color: #FFFFFF; 
+			color: #0b5f7b;
+            position: absolute; 
+            left:0%; 
+            bottom:0px; 
+            width: 100%; 
+			padding-left: 5%;
+			padding-top: 5%;
+            height: 175px;
+            z-index:5; 
+            border-color:#0b5f7b; 
+            -moz-box-shadow:    inset 0 0 10px #0b5f7b;
+			-webkit-box-shadow: inset 0 0 10px #0b5f7b;
+			box-shadow:         inset 0 0 10px #0b5f7b;
+}
+
+#now_playing_div  {
+    color: #0b5f7b;
+}

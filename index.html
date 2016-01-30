@@ -1,0 +1,115 @@
+<html>
+<head>
+    <title> Euphony </title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="dist/id3-minimized.js" type="text/javascript"></script>
+	<!-- Boostrap CDN -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	
+	<script src="dist/id3-minimized.js" type="text/javascript"></script>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="js/driver.js"> </script>
+    <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
+	<script>
+        function moveNowPlayingDiv() {
+            var divElem = document.getElementById('now_playing_div');
+            divElem.style.top = (window.scrollY + window.innerHeight - parseInt(divElem.style.height)) + 'px';
+        }
+		
+        function loadNowPlayingDiv() {
+            document.getElementById('now_playing_div').style.height = '100px';
+            movediv();  //sync reload
+        }
+	
+		function loadID3tags()
+		{
+			var source = document.getElementById('src1');
+			var inputFile = source.src;
+			
+			ID3.loadTags(inputFile, function() {
+				  showTags(inputFile);
+				}, {
+				  tags: ["title","artist","album","picture"]
+				});
+		
+		}
+	
+		function showTags(url) {
+			var tags = ID3.getAllTags(url);
+			console.log(tags);
+			document.getElementById('title').textContent = tags.title || "";
+			document.getElementById('artist').textContent = tags.artist || "";
+			document.getElementById('album').textContent = tags.album || "";
+			var image = tags.picture;
+			if (image) {
+				var base64String = "";
+				for (var i = 0; i < image.data.length; i++) {
+					base64String += String.fromCharCode(image.data[i]);
+				}
+				var base64 = "data:" + image.format + ";base64," + window.btoa(base64String);
+				document.getElementById('picture').setAttribute('src',base64);
+			  } 
+			else {
+				document.getElementById('picture').style.display = "none";
+			}
+		}
+	 
+    </script>
+</head>
+<body onload="loadNowPlayingDiv();" onscroll="moveNowPlayingDiv();" style="font-family: myfont;">
+    <center><h1>Euphony</h1></center>
+    <div id="error_msg"> </div>
+    <div id="content">
+        <!-- show loading image when opening the page -->
+		<center>
+		<h3>Syncing...</h3>
+        <img src="loading.gif" width="200px"/> </center>
+    </div>
+    <script type="text/javascript">
+       $(document).ready(function(){
+    $.ajax({        // call php script
+        url: 'loadSongs.php',
+        type:'GET',
+        
+        contentType: 'html'
+    }).success(function(data){
+            // remove loading image and add content received from php 
+        $('div#content').html(data);
+
+    }).error(function(jqXHR, textStatus, errorThrown){
+            // in case something went wrong, show error
+        $('div#error_msg').append('Sorry, something went wrong: ' + textStatus + ' (' + errorThrown + ')');
+    });
+});
+    </script>
+
+	
+<div id="now_playing_div">
+	<table class="table" style="color: #0b5f7b;">
+	<tbody>
+		<tr> <center> 
+	<audio id="player" controls="controls"> <source id="src1" autoplay></source></audio>
+	
+	
+</center> </tr>
+		<tr>
+			<td> <img id="picture" width="50px" height="50px" alt= "Album Art Unavailable" /> </td>
+			<td>
+				<span id="title"></span> <br> 
+				<span id="artist"></span>  <br> 
+				<span id="album"></span>
+			</td>
+			<td> <a href="#" onclick="pause();"> Pause </a> | <a href="#" onclick="play();"> Play </a> </tr>
+		</tr>
+	</tbody>
+	</table>
+		
+</div>
+	
+	
+</body>
+</html>

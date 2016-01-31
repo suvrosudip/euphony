@@ -14,6 +14,9 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<script src="js/driver.js"> </script>
     <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
+	
+
+	
 	<script>
         function moveNowPlayingDiv() {
             var divElem = document.getElementById('now_playing_div');
@@ -21,7 +24,7 @@
         }
 		
         function loadNowPlayingDiv() {
-            document.getElementById('now_playing_div').style.height = '100px';
+            document.getElementById('now_playing_div').style.height = '130px';
             movediv();  //sync reload
         }
 	
@@ -91,19 +94,38 @@
 <div id="now_playing_div">
 	<table class="table" style="color: #0b5f7b;">
 	<tbody>
-		<tr> <center> 
-	<audio id="player" controls="controls"> <source id="src1" autoplay></source></audio>
+		<tr> 
+			<audio id="player" ontimeupdate="updateTime()"> <source id="src1" autoplay></source></audio>
+			<!-- Song Slider tracks progress on song time change, if you click it sets the distance into the song
+					based on the percentage of where was clicked -->
+			<div id="songSlider" onclick="setSongPosition(this,event)"><div id="trackProgress"></div> </div> 
+		</tr>
+		
+			
 	
 	
-</center> </tr>
-		<tr>
-			<td> <img id="picture" width="50px" height="50px" alt= "Album Art Unavailable" /> </td>
+		<tr style="width: 40%">
+			<td> <img id="picture" width="45px" height="45px" alt= "Album Art Unavailable" /> </td>
 			<td>
-				<span id="title"></span> <br> 
-				<span id="artist"></span>  <br> 
-				<span id="album"></span>
+				<span id="title" style="font-size: 12px"></span> <br> 
+				<span id="artist" style="font-size: 12px"></span>  <br> 
+				<span id="album" style="font-size: 12px"></span>
+				
 			</td>
-			<td> <a href="#" onclick="pause();"> Pause </a> | <a href="#" onclick="play();"> Play </a> </tr>
+			
+			<td>
+				<center>
+				<div id="songTime">0:00 / 0:00</div>
+				<div><button id="playButton" class="play" onclick="playPause('player')"> </button> <button id="stopButton" class="stop" onclick="stopSong();"> </button></div> </center>
+				
+			</td>
+			
+					
+							
+								
+			
+			
+		</tr>
 		</tr>
 	</tbody>
 	</table>

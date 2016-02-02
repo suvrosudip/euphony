@@ -1,4 +1,4 @@
-
+var currentSongCount=0;  
 function updateSource(song){ 
 	var player = document.getElementById('player');
     var source = document.getElementById('src1');
@@ -8,6 +8,8 @@ function updateSource(song){
 	player.play();
 	playButton.className = "";
 	playButton.className = "pause";
+	
+
 		
 }
 
@@ -44,6 +46,7 @@ function updateTime(){
     
     //Updates the track progress div.
     document.getElementById('trackProgress').style.width = Math.round(percentageOfSlider) + "px";
+	
 }
 
 
@@ -72,6 +75,8 @@ function setSongPosition(obj,e){
 function stopSong(){
     activeSong.currentTime = 0;
     activeSong.pause();
+	playButton.className = "";
+		playButton.className = "play";
 }
 
 

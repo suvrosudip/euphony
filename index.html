@@ -70,7 +70,7 @@
         <!-- show loading image when opening the page -->
 		<center>
 		<h3>Syncing...</h3>
-        <img src="loading.gif" width="200px"/> </center>
+        <img src="images/loader.gif" width="150px" /> </center>
     </div>
     <script type="text/javascript">
        $(document).ready(function(){
@@ -104,12 +104,12 @@
 			
 	
 	
-		<tr style="width: 40%">
+		<tr style="width: 30%">
 			<td> <img id="picture" width="65px" height="65px" alt= "" /> </td>
 			<td>
-				<span id="title" style="font-size: 12px"></span> <br> 
-				<span id="artist" style="font-size: 12px"></span>  <br> 
-				<span id="album" style="font-size: 12px"></span>
+				<b><output type="text" id="title" style="font-size: 14px;" class="truncate"></output>  </b>
+				<output id="artist" style="font-size: 10px;" class="truncate"></output>  
+				<output id="album" style="font-size: 10px;" class="truncate"></output>
 				
 			</td>
 			

@@ -22,8 +22,8 @@
 </head>
 <body>
 <div class="container" style="font-color: #FFFFFF;">
-	<p>Available Songs:</p>            
-	<table class="table">
+	       
+	<table id="songList" class="table" style="border-style: none">
 		<tbody>
 		<?php
 		// include getID3() library (can be in a different directory if full path is specified)
@@ -34,7 +34,7 @@
 
 		$DirectoryToScan = 'sdcard/'; // change to whatever directory you want to scan
 		$dir = opendir($DirectoryToScan);
-		echo '<tr>';
+		//echo '<tr>';
 		$countImage=1;
 		while (($file = readdir($dir)) !== false) {
 			
@@ -42,7 +42,7 @@
 			//echo $FullFileName;
 			if ((substr($file, 0, 1) != '.') && is_file($FullFileName)) {
 				set_time_limit(30);
-
+				
 				$ThisFileInfo = $getID3->analyze($FullFileName);
 
 				getid3_lib::CopyTagsToComments($ThisFileInfo);
@@ -51,8 +51,9 @@
 				if(isset($ThisFileInfo['comments']['picture'][0])){
 						$Image1='data:'.$ThisFileInfo['comments']['picture'][0]['image_mime'].';charset=utf-8;base64,'.base64_encode($ThisFileInfo['comments']['picture'][0]['data']);
 					}
-				echo '<td><a href="#" onclick="updateSource('.$countImage.'); loadID3tags();"><img id="'.$countImage.'" data-value="sdcard/'.$file.'" width="50" height="50" src="'.$Image1.'"></a></td>';
-				echo '<td><a href="#" onclick="updateSource('.$countImage.'); loadID3tags();">'              .htmlentities(!empty($ThisFileInfo['comments_html']['title'])  ? implode('<br>', $ThisFileInfo['comments_html']['title'])          : chr(160)).'<br/>';
+				echo '<tr id="'.$countImage.'0">';
+				echo '<td><a href="#image'.$countImage.'" onclick="updateSource('.$countImage.'); loadID3tags();"><img name="image'.$countImage.'" id="'.$countImage.'" data-value="sdcard/'.$file.'" width="45" height="50" src="'.$Image1.'"></ouput></a></td>';
+				echo '<td><a href="#image'.$countImage.'" onclick="updateSource('.$countImage.'); loadID3tags();"><output type="text" class="truncateScript">' .htmlentities(!empty($ThisFileInfo['comments_html']['title'])  ? implode('<br>', $ThisFileInfo['comments_html']['title'])          : chr(160)).'<br/>';
 				echo ''              .htmlentities(!empty($ThisFileInfo['comments_html']['artist']) ? implode('<br>', $ThisFileInfo['comments_html']['artist'])         : chr(160)).'<br/></td>';
 				//echo ''.htmlentities(!empty($ThisFileInfo['playtime_string'])         ?                 $ThisFileInfo['playtime_string']                  : chr(160)).'</a></td>';
 				$countImage++;

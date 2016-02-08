@@ -126,6 +126,21 @@ a:active {
 	
 }
 
+.truncate {
+  width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.truncateScript {
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #FFFFFF;
+}
+
 .play{background: url('../images/play.png') ;}
 .pause{background: url('../images/pause.png') ;}
 .stop{background: url('../images/stop.png') ;}

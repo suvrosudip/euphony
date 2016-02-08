@@ -1,5 +1,8 @@
-var currentSongCount=0;  
+var currentSongCount;  
+
 function updateSource(song){ 
+	currentSongCount=song;
+	//alert(currentSongCount);
 	var player = document.getElementById('player');
     var source = document.getElementById('src1');
 	source.src = document.getElementById(song).getAttribute('data-value');
@@ -8,10 +11,18 @@ function updateSource(song){
 	player.play();
 	playButton.className = "";
 	playButton.className = "pause";
+	loadID3tags();
 	
 
 		
 }
+
+$('.table > tbody > tr').click(function() {
+    $(this).addClass("active").siblings().removeClass("active");
+	
+});
+
+
 
 var activeSong;
 //Does a switch of the play/pause with one button.
@@ -46,6 +57,20 @@ function updateTime(){
     
     //Updates the track progress div.
     document.getElementById('trackProgress').style.width = Math.round(percentageOfSlider) + "px";
+	
+	if(percentageOfSong==1.0)
+	{
+		var countTR = 10 * currentSongCount;
+		var row = document.getElementById(countTR);
+		currentSongCount++;
+		updateSource(currentSongCount);
+		row.className = "";
+		countTR = 10 * currentSongCount;
+		row = document.getElementById(countTR);
+		row.className = "active";
+		
+	}
+	
 	
 }
 

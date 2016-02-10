@@ -51,14 +51,14 @@
 				if(isset($ThisFileInfo['comments']['picture'][0])){
 						$Image1='data:'.$ThisFileInfo['comments']['picture'][0]['image_mime'].';charset=utf-8;base64,'.base64_encode($ThisFileInfo['comments']['picture'][0]['data']);
 					}
-				echo '<tr id="'.$countImage.'0">';
+				echo '<a href="#image'.$countImage.'" onclick="updateSource('.$countImage.'); loadID3tags();"><tr id="'.$countImage.'0">';
 				echo '<td><a href="#image'.$countImage.'" onclick="updateSource('.$countImage.'); loadID3tags();"><img name="image'.$countImage.'" id="'.$countImage.'" data-value="sdcard/'.$file.'" width="45" height="50" src="'.$Image1.'"></ouput></a></td>';
 				echo '<td><a href="#image'.$countImage.'" onclick="updateSource('.$countImage.'); loadID3tags();"><output type="text" class="truncateScript">' .htmlentities(!empty($ThisFileInfo['comments_html']['title'])  ? implode('<br>', $ThisFileInfo['comments_html']['title'])          : chr(160)).'<br/>';
 				echo ''              .htmlentities(!empty($ThisFileInfo['comments_html']['artist']) ? implode('<br>', $ThisFileInfo['comments_html']['artist'])         : chr(160)).'<br/></td>';
 				//echo ''.htmlentities(!empty($ThisFileInfo['playtime_string'])         ?                 $ThisFileInfo['playtime_string']                  : chr(160)).'</a></td>';
 				$countImage++;
 			}
-			echo '</tr>';
+			echo '</tr></a>';
 		}
 		
 		

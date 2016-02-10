@@ -18,7 +18,14 @@ function updateSource(song){
 }
 
 $('.table > tbody > tr').click(function() {
-    $(this).addClass("active").siblings().removeClass("active");
+    var id=this.id;
+	
+	if(id!="song-metadata"){
+		if(id!="progressbartime"){
+			$(this).addClass("active").siblings().removeClass("active");
+		}
+	}
+	
 	
 });
 
@@ -49,7 +56,7 @@ function updateTime(){
     var currentSeconds = (Math.floor(activeSong.currentTime % 60) < 10 ? '0' : '') + Math.floor(activeSong.currentTime % 60);
     var currentMinutes = Math.floor(activeSong.currentTime / 60);
     //Sets the current song location compared to the song duration.
-    document.getElementById('songTime').innerHTML = currentMinutes + ":" + currentSeconds + ' / ' + Math.floor(activeSong.duration / 60) + ":" + (Math.floor(activeSong.duration % 60) < 10 ? '0' : '') + Math.floor(activeSong.duration % 60);
+    document.getElementById('songTime').innerHTML = currentMinutes + ":" + currentSeconds + '/' + Math.floor(activeSong.duration / 60) + ":" + (Math.floor(activeSong.duration % 60) < 10 ? '0' : '') + Math.floor(activeSong.duration % 60);
 
     //Fills out the slider with the appropriate position.
     var percentageOfSong = (activeSong.currentTime/activeSong.duration);

@@ -2,7 +2,7 @@ var SerialPortFactory = require("serialport");
 var port = "/dev/ttyMFD1";  
 var serialPort = new SerialPortFactory.SerialPort(port,  
     {  
-    baudrate: 115200,   
+    baudrate: 115000,   
     dataBits: 8,   
    parity: 'none',   
    stopBits: 1,   
@@ -15,7 +15,7 @@ serialPort.open(function (error) {
     }   
     else {  
         console.log('open'); 
-		console.log('atempt');
+		console.log('atempt3');
         serialPort.on('data', function (data) {  
             console.log('data received: ' + data);  
         });  
